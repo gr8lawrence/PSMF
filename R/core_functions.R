@@ -57,7 +57,7 @@ update_G_TL <- function(G_old, M, C_new, G_0, n_markers, n_good_cell_types, alph
 
 # Main algorithm ----------------------------------------------------------
 ## this section contains the main body of the algorithm
-PSMF_solve <- function(M, G_0, G_init, C_init=NULL, n_markers, n_good_cell_types, alpha, xi, beta, max_iter=1e5, eps, method) {
+PSMF_solve <- function(M, G_0, G_init, C_init=NULL, n_markers, n_good_cell_types, alpha, xi, beta, max_iter=1e5, tol=1e-5, method) {
 
   # parameters
   n_genes = nrow(M)
@@ -83,7 +83,7 @@ PSMF_solve <- function(M, G_0, G_init, C_init=NULL, n_markers, n_good_cell_types
   G_change = Inf
 
   # start the algorithm
-  while(n_iter < max_iter & min(C_change, G_change) >= eps) {
+  while(n_iter < max_iter & min(C_change, G_change) >= tol) {
 
     if (n_iter %% 2 == 0) {
       # if n_iter is even, update C
